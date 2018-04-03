@@ -2,13 +2,15 @@
 	import flash.display.MovieClip
 	import flash.events.MouseEvent;
 	import flash.net.URLRequest;
-	//import com.adobe.tvsdk.mediacore.utils.SWFTokenDataLoader;
 	import flash.display.Loader;
 	import flash.utils.Timer;
 	import flash.events.TimerEvent;
 	import fl.transitions.Tween;
 	import fl.transitions.easing.*;
-
+	import fl.transitions.TweenEvent;
+	import flash.net.URLLoader;
+	import flash.net.navigateToURL;
+	
 	public class MainRecopilacion extends MovieClip {
 		var swf: Loader = new Loader(); //variable que nos ayudara a mostrar el swf
 		var ok: Boolean = false; //variable que nos ayudara a saber si ya se abrio algun swf
@@ -19,15 +21,15 @@
 		var frame: int = 1; //variable que nos ayudara a saber en que frame estamos antes de cambiar de frame
 		var op: int = 0; //variable que nos ayudara a saber a que frame debemos cambiar
 		public function MainRecopilacion() {
-			stop();//hacemos que nuestra animacion se mantenga en el primer frame hasta que se haga algo
+			stop(); //hacemos que nuestra animacion se mantenga en el primer frame hasta que se haga algo
 			//Tweens para cuando se inicie la animacion
-			var tTween:Tween = new Tween(tabla,"x",Strong.easeOut,-600,0,1,true);
-			var iTween:Tween = new Tween(inicio_btn,"x",Strong.easeOut,-600,0,1,true);
-			var pTween:Tween = new Tween(practicas_btn,"x",Strong.easeOut,-600,0,1.5,true);
-			var vTween:Tween = new Tween(vjuegos_btn,"x",Strong.easeOut,-600,0,2,true);
-			var mTween:Tween = new Tween(media_btn,"x",Strong.easeOut,-600,0,2.5,true);
-			var cTween:Tween = new Tween(conclusiones_btn,"x",Strong.easeOut,-600,0,3,true);
-			var uTween:Tween = new Tween(upv,"y",Strong.easeOut,-600,24,3,true);
+			var tTween: Tween = new Tween(tabla, "x", Strong.easeOut, -600, 0, 1, true);
+			var iTween: Tween = new Tween(inicio_btn, "x", Strong.easeOut, -600, 0, 1, true);
+			var pTween: Tween = new Tween(practicas_btn, "x", Strong.easeOut, -600, 0, 1.5, true);
+			var vTween: Tween = new Tween(vjuegos_btn, "x", Strong.easeOut, -600, 0, 2, true);
+			var mTween: Tween = new Tween(media_btn, "x", Strong.easeOut, -600, 0, 2.5, true);
+			var cTween: Tween = new Tween(conclusiones_btn, "x", Strong.easeOut, -600, 0, 3, true);
+			var uTween: Tween = new Tween(upv, "y", Strong.easeOut, -600, 24, 3, true);
 			asignacionesMenu();
 			//funcion para ir al frame de inicio en el que se encuentra la portada
 			function irInicio(Event: MouseEvent): void {
@@ -52,11 +54,7 @@
 			//funcion para ir al quinto frame donde estan los videos de conclusiones
 			function irConclusiones(Event: MouseEvent): void {
 				op = 5;
-				timer.stop();
-				cont = 0;
 				okey();
-				gotoAndStop(5);
-				asignacionesMenu();
 			}
 			//funcion que se llamara en diferentes casos para asignar funciones a los botones del menu
 			function asignacionesMenu() {
@@ -88,6 +86,11 @@
 			function asignacionesF4() {
 				gvideos_btn.addEventListener(MouseEvent.CLICK, gVideos);
 				gto_btn.addEventListener(MouseEvent.CLICK, gTO);
+			}
+			//funcion que se llamara en los diferentes casos para ir al frame 4 para asignar funciones a los fotones de dicho frame
+			function asignacionesF5() {
+				conclusionesE_btn.addEventListener(MouseEvent.CLICK, video1);
+				conclusionesI_btn.addEventListener(MouseEvent.CLICK, video2);
 			}
 			//funcion para abrir la practica 1
 			function p1(event: MouseEvent): void {
@@ -270,6 +273,12 @@
 				asignacionesF4();
 				asignacionesMenu();
 			}
+			function volverf5(event: MouseEvent): void {
+				okey();
+				gotoAndStop(5);
+				asignacionesF5();
+				asignacionesMenu();
+			}
 			//funcion que nos ayudara a saber si se ha abierto algun proyecto, para que si es asi lo quitemos
 			//y cambiemos de frame, de lo contrario solo hacemos algunas acciones que haran que otras se ejecuten
 			function okey() {
@@ -305,6 +314,7 @@
 							frame = 5;
 							gotoAndStop(5);
 							asignacionesMenu();
+							asignacionesF5();
 							break;
 					}
 				} else { //si no, entonces por si a caso detenemos un timer y reseteamos una de sus variables
@@ -344,6 +354,7 @@
 									frame = 5;
 									gotoAndStop(5);
 									asignacionesMenu();
+									asignacionesF5();
 									break;
 							}
 						} else {
@@ -364,7 +375,7 @@
 									f1af4.gotoAndPlay(2);
 									break;
 								case 5:
-									trace("okey");
+									var CT1:Tween = new Tween(FC,"x",Strong.easeOut,1366,270,1,true);
 									break;
 							}
 						}
@@ -395,6 +406,7 @@
 									frame = 5;
 									gotoAndStop(5);
 									asignacionesMenu();
+									asignacionesF5();
 									break;
 							}
 						} else {
@@ -415,7 +427,7 @@
 									f2af4.gotoAndPlay(2);
 									break;
 								case 5:
-									trace("okey");
+									var CT2:Tween = new Tween(FC,"x",Strong.easeOut,1366,270,1,true);
 									break;
 							}
 						}
@@ -446,6 +458,7 @@
 									frame = 5;
 									gotoAndStop(5);
 									asignacionesMenu();
+								asignacionesF5();
 									break;
 							}
 						} else {
@@ -466,7 +479,7 @@
 									f3af4.gotoAndPlay(2);
 									break;
 								case 5:
-									trace("okey");
+									var CT3:Tween = new Tween(FC,"x",Strong.easeOut,1366,270,1,true);
 									break;
 							}
 						}
@@ -497,6 +510,7 @@
 									frame = 5;
 									gotoAndStop(5);
 									asignacionesMenu();
+								asignacionesF5();
 									break;
 							}
 						} else {
@@ -517,7 +531,7 @@
 									f4af3.gotoAndPlay(2);
 									break;
 								case 5:
-									trace("okey");
+									var CT4:Tween = new Tween(FC,"x",Strong.easeOut,1366,270,1,true);
 									break;
 							}
 						}
@@ -552,9 +566,14 @@
 				}
 			}
 			timer.addEventListener(TimerEvent.TIMER, tiempo);
-
+			function video1(Event:MouseEvent):void{
+				var Videos:URLRequest = new URLRequest("conclusionesEspañol.mp4");
+				navigateToURL(Videos,"self");
+			}
+			function video2(Event:MouseEvent):void{
+				var Videos:URLRequest = new URLRequest("conclusionesIngles.mp4");
+				navigateToURL(Videos,"self");
+			}
 		}
-
 	}
-
 }
