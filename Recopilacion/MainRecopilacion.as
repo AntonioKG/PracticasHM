@@ -241,13 +241,13 @@
 			}
 			function Jtetris(event: MouseEvent): void {
 				ok = true;
-				gotoAndStop(6);
-				//volver_btn.addEventListener(MouseEvent.CLICK, volverf3);
+				gotoAndStop(7);
+				volver_btn.addEventListener(MouseEvent.CLICK, volverf3);
 				var practicaSWF: URLRequest = new URLRequest("tetris/Práctica Tetris.swf");
 				swf.load(practicaSWF);
 				stage.addChild(swf);
-				swf.x = 550;
-				swf.y = 270;
+				swf.x = 0;
+				swf.y = 0;
 			}
 			//funcion para abrir la galeria de videos
 			function gVideos(event: MouseEvent): void {
