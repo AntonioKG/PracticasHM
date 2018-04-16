@@ -81,6 +81,7 @@
 			function asignacionesF3() {
 				memo_btn.addEventListener(MouseEvent.CLICK, Jmemo);
 				sye_btn.addEventListener(MouseEvent.CLICK, Jsye);
+				tetris_btn.addEventListener(MouseEvent.CLICK, Jtetris);
 			}
 			//funcion que se llamara en los diferentes casos para ir al frame 4 para asignar funciones a los fotones de dicho frame
 			function asignacionesF4() {
@@ -237,6 +238,16 @@
 				stage.addChild(swf);
 				swf.x = 30;
 				swf.y = 0;
+			}
+			function Jtetris(event: MouseEvent): void {
+				ok = true;
+				gotoAndStop(6);
+				//volver_btn.addEventListener(MouseEvent.CLICK, volverf3);
+				var practicaSWF: URLRequest = new URLRequest("tetris/Práctica Tetris.swf");
+				swf.load(practicaSWF);
+				stage.addChild(swf);
+				swf.x = 550;
+				swf.y = 270;
 			}
 			//funcion para abrir la galeria de videos
 			function gVideos(event: MouseEvent): void {
